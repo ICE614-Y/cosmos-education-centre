@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宇宙教育中心 Cosmos Education Centre</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #0099E6;
+  --blue-dark: #0077B8;
+  --blue-deeper: #00508A;
+  --blue-light: #E6F5FF;
+  --blue-mid: #B3DFF7;
+  --accent: #FF6B35;
+  --gold: #F5A623;
+  --white: #FFFFFF;
+  --off-white: #F7FAFE;
+  --gray-50: #F4F6F9;
+  --gray-100: #E8ECF2;
+  --gray-200: #CDD4DF;
+  --gray-500: #7A8899;
+  --gray-700: #3D4A5C;
+  --gray-900: #1A2332;
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Noto Sans TC', sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-xl: 36px;
+  --shadow-sm: 0 2px 8px rgba(0,100,200,0.08);
+  --shadow-md: 0 6px 24px rgba(0,100,200,0.12);
+  --shadow-lg: 0 16px 48px rgba(0,100,200,0.16);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:var(--font-body); color:var(--gray-900); background:var(--white); overflow-x:hidden; line-height:1.7; }
+
+/* NAV */
+nav { position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(255,255,255,0.94); backdrop-filter:blur(16px); border-bottom:1px solid var(--gray-100); transition:all 0.3s; }
+.nav-inner { max-width:1100px; margin:0 auto; padding:0 2rem; height:66px; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.nav-logo-img { width:42px; height:42px; border-radius:9px; object-fit:contain; background:#fff; }
+.nav-logo-text { display:flex; flex-direction:column; line-height:1.15; }
+.nav-logo-text .zh { font-family:var(--font-body); font-weight:700; font-size:15px; color:var(--gray-900); letter-spacing:0.02em; }
+.nav-logo-text .en { font-family:var(--font-display); font-size:11px; color:var(--gray-500); font-weight:500; }
+.nav-links { display:flex; align-items:center; gap:1.75rem; list-style:none; }
+.nav-links a { text-decoration:none; font-size:14px; font-weight:500; color:var(--gray-700); transition:color 0.2s; font-family:var(--font-body); }
+.nav-links a:hover { color:var(--blue); }
+.nav-cta { background:var(--blue) !important; color:white !important; padding:9px 22px; border-radius:99px; font-weight:600 !important; font-family:var(--font-body) !important; transition:all 0.2s !important; }
+.nav-cta:hover { background:var(--blue-dark) !important; transform:scale(1.03); }
+.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+.nav-hamburger span { display:block; width:22px; height:2px; background:var(--gray-700); border-radius:2px; transition:all 0.3s; }
+
+/* HERO */
+#hero { min-height:100vh; display:flex; align-items:center; position:relative; overflow:hidden; padding-top:66px; }
+.hero-photo { position:absolute; inset:0; }
+.hero-photo img { width:100%; height:100%; object-fit:cover; object-position:center 30%; }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg, rgba(5,20,50,0.88) 0%, rgba(0,40,90,0.75) 50%, rgba(0,20,50,0.65) 100%); }
+.hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(0,153,230,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,153,230,0.05) 1px,transparent 1px); background-size:60px 60px; }
+.hero-orb { position:absolute; border-radius:50%; filter:blur(80px); }
+.hero-orb-1 { width:500px; height:500px; background:var(--blue); top:-150px; right:-100px; opacity:0.18; }
+.hero-orb-2 { width:300px; height:300px; background:#0050A0; bottom:-80px; left:-80px; opacity:0.2; }
+.hero-inner { position:relative; max-width:1100px; margin:0 auto; padding:5rem 2rem 4rem; z-index:1; }
+.hero-badge { display:inline-flex; align-items:center; gap:7px; background:rgba(0,153,230,0.15); border:1px solid rgba(0,153,230,0.3); border-radius:99px; padding:6px 16px; font-size:13px; font-weight:500; color:var(--blue-mid); margin-bottom:1.5rem; animation:fadeUp 0.6s ease both; font-family:var(--font-body); }
+.hero-badge-dot { width:7px; height:7px; background:var(--blue); border-radius:50%; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(0.8); } }
+.hero-title { font-family:var(--font-body); font-size:clamp(2.6rem,6vw,4rem); font-weight:900; color:white; line-height:1.1; margin-bottom:0.6rem; animation:fadeUp 0.6s 0.1s ease both; letter-spacing:-0.01em; }
+.hero-subtitle-en { font-family:var(--font-display); font-size:clamp(1rem,2.5vw,1.4rem); font-weight:400; color:rgba(255,255,255,0.55); margin-bottom:1.25rem; animation:fadeUp 0.6s 0.15s ease both; letter-spacing:0.04em; }
+.hero-desc { font-size:1.05rem; color:rgba(255,255,255,0.7); line-height:1.8; margin-bottom:2rem; max-width:520px; animation:fadeUp 0.6s 0.2s ease both; font-family:var(--font-body); }
+.hero-actions { display:flex; gap:12px; flex-wrap:wrap; animation:fadeUp 0.6s 0.3s ease both; }
+.btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--blue); color:white; padding:14px 30px; border-radius:99px; font-family:var(--font-body); font-weight:700; font-size:15px; text-decoration:none; transition:all 0.2s; box-shadow:0 4px 20px rgba(0,153,230,0.4); }
+.btn-primary:hover { background:var(--blue-dark); transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,153,230,0.5); }
+.btn-secondary { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); color:white; padding:14px 28px; border-radius:99px; font-family:var(--font-body); font-weight:600; font-size:15px; text-decoration:none; border:1px solid rgba(255,255,255,0.2); transition:all 0.2s; }
+.btn-secondary:hover { background:rgba(255,255,255,0.18); transform:translateY(-2px); }
+.hero-stats { display:flex; gap:2.5rem; margin-top:2.5rem; animation:fadeUp 0.6s 0.4s ease both; }
+.stat-num { font-family:var(--font-display); font-size:2rem; font-weight:800; color:white; line-height:1; }
+.stat-label { font-size:12px; color:rgba(255,255,255,0.5); margin-top:3px; font-family:var(--font-body); }
+.stat-div { width:1px; background:rgba(255,255,255,0.15); height:40px; align-self:center; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+/* SECTIONS */
+.section-inner { max-width:1100px; margin:0 auto; padding:5rem 2rem; }
+.section-label { font-family:var(--font-body); font-size:12px; font-weight:700; letter-spacing:0.1em; color:var(--blue); margin-bottom:0.6rem; }
+.section-title { font-family:var(--font-body); font-size:clamp(1.8rem,4vw,2.6rem); font-weight:900; color:var(--gray-900); line-height:1.2; margin-bottom:0.75rem; }
+.section-title .en { display:block; font-family:var(--font-display); font-size:0.5em; font-weight:400; color:var(--gray-500); margin-top:0.3em; letter-spacing:0.02em; }
+.section-subtitle { font-size:1rem; color:var(--gray-500); max-width:560px; line-height:1.8; }
+
+/* ABOUT */
+#about { background:var(--off-white); }
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+.about-photo-wrap { position:relative; }
+.about-photo-bg { position:absolute; inset:-14px; background:var(--blue-light); border-radius:var(--radius-xl); transform:rotate(-2deg); }
+.about-photo { position:relative; z-index:1; border-radius:var(--radius-lg); overflow:hidden; aspect-ratio:4/3; }
+.about-photo img { width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block; }
+.about-teacher-badge { position:absolute; bottom:-18px; right:-18px; z-index:2; background:var(--white); border-radius:var(--radius-md); padding:14px 18px; box-shadow:var(--shadow-md); display:flex; align-items:center; gap:10px; }
+.teacher-avatar { width:44px; height:44px; background:var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; font-size:16px; color:white; flex-shrink:0; }
+.teacher-badge-text strong { display:block; font-family:var(--font-display); font-size:14px; font-weight:700; color:var(--gray-900); }
+.teacher-badge-text span { font-size:11px; color:var(--gray-500); }
+.about-tags { display:flex; flex-wrap:wrap; gap:8px; margin:1.5rem 0; }
+.about-tag { background:var(--blue-light); color:var(--blue-dark); font-size:13px; font-weight:500; padding:6px 16px; border-radius:99px; font-family:var(--font-body); }
+.about-features { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:1.5rem; }
+.about-feature { background:var(--white); border-radius:var(--radius-md); padding:16px; border:1px solid var(--gray-100); transition:box-shadow 0.2s,transform 0.2s; }
+.about-feature:hover { box-shadow:var(--shadow-sm); transform:translateY(-2px); }
+.about-feature-icon { font-size:22px; margin-bottom:8px; }
+.about-feature h4 { font-family:var(--font-body); font-size:14px; font-weight:700; color:var(--gray-900); margin-bottom:3px; }
+.about-feature p { font-size:12px; color:var(--gray-500); line-height:1.6; }
+
+/* COURSES */
+#courses { background:var(--white); }
+.courses-tabs { display:flex; gap:8px; margin:2rem 0; overflow-x:auto; padding-bottom:4px; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+.courses-tabs::-webkit-scrollbar { display:none; }
+.tab-btn { flex-shrink:0; padding:10px 22px; border-radius:99px; border:1.5px solid var(--gray-200); background:var(--white); font-family:var(--font-body); font-size:14px; font-weight:600; color:var(--gray-500); cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+.tab-btn:hover { border-color:var(--blue); color:var(--blue); }
+.tab-btn.active { background:var(--blue); border-color:var(--blue); color:white; box-shadow:0 4px 14px rgba(0,153,230,0.35); }
+.course-panel { display:none; }
+.course-panel.active { display:block; }
+.course-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:2.5rem; align-items:start; }
+.course-tag { display:inline-block; background:var(--blue-light); color:var(--blue-dark); font-size:12px; font-weight:700; padding:4px 14px; border-radius:6px; margin-bottom:14px; font-family:var(--font-body); letter-spacing:0.04em; }
+.course-title { font-family:var(--font-body); font-size:1.7rem; font-weight:900; color:var(--gray-900); line-height:1.2; margin-bottom:4px; }
+.course-title-en { font-family:var(--font-display); font-size:1rem; font-weight:400; color:var(--gray-500); margin-bottom:1rem; letter-spacing:0.02em; }
+.course-desc { font-size:0.95rem; color:var(--gray-500); line-height:1.8; margin-bottom:1.5rem; }
+.course-highlights { display:flex; flex-direction:column; gap:10px; }
+.course-highlight { display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--gray-700); }
+.ch-dot { width:20px; height:20px; background:var(--blue-light); border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px; }
+.ch-dot::after { content:''; width:7px; height:7px; background:var(--blue); border-radius:50%; }
+.course-img { border-radius:var(--radius-md); overflow:hidden; margin-bottom:1.25rem; }
+.course-img img { width:100%; aspect-ratio:16/10; object-fit:cover; display:block; }
+.course-schedule-card { background:var(--gray-50); border-radius:var(--radius-lg); padding:1.75rem; border:1px solid var(--gray-100); }
+.schedule-title { font-family:var(--font-body); font-size:14px; font-weight:700; color:var(--gray-700); margin-bottom:1rem; }
+.schedule-items { display:flex; flex-direction:column; gap:8px; margin-bottom:1.25rem; }
+.schedule-item { background:var(--white); border-radius:var(--radius-sm); padding:12px 16px; display:flex; align-items:center; justify-content:space-between; border:1px solid var(--gray-100); }
+.schedule-day { font-family:var(--font-body); font-size:14px; font-weight:700; color:var(--gray-900); }
+.schedule-time { font-size:12px; color:var(--gray-500); margin-top:2px; }
+.schedule-from { font-family:var(--font-display); font-size:13px; font-weight:700; color:var(--blue); white-space:nowrap; }
+.schedule-note { font-size:12px; color:var(--gray-700); background:var(--blue-light); border-radius:8px; padding:10px 14px; line-height:1.6; }
+
+/* PRICING */
+#pricing { background:var(--gray-900); }
+#pricing .section-label { color:var(--blue-mid); }
+#pricing .section-title { color:white; }
+#pricing .section-title .en { color:rgba(255,255,255,0.35); }
+#pricing .section-subtitle { color:rgba(255,255,255,0.55); }
+.pricing-toggle { display:flex; align-items:center; gap:14px; margin:2rem 0 2.5rem; }
+.toggle-label { font-family:var(--font-body); font-size:14px; font-weight:600; color:rgba(255,255,255,0.45); transition:color 0.2s; }
+.toggle-label.active { color:white; }
+.toggle-switch { position:relative; width:56px; height:28px; background:var(--blue); border-radius:99px; cursor:pointer; transition:background 0.3s; border:none; outline:none; }
+.toggle-knob { position:absolute; top:3px; left:3px; width:22px; height:22px; background:white; border-radius:50%; transition:transform 0.3s; pointer-events:none; }
+.toggle-switch.toggled .toggle-knob { transform:translateX(28px); }
+.pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.price-card { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:var(--radius-lg); padding:1.75rem; transition:all 0.3s; position:relative; overflow:hidden; }
+.price-card:hover { background:rgba(255,255,255,0.09); transform:translateY(-4px); box-shadow:0 12px 36px rgba(0,0,0,0.3); }
+.price-card.featured { background:var(--blue); border-color:var(--blue); }
+.price-card.featured::before { content:'推薦'; position:absolute; top:16px; right:-18px; background:var(--gold); color:#7A4500; font-size:10px; font-weight:700; font-family:var(--font-body); padding:4px 28px; transform:rotate(35deg); }
+.price-level { font-family:var(--font-body); font-size:22px; font-weight:900; color:white; margin-bottom:4px; }
+.price-level-en { font-family:var(--font-display); font-size:11px; font-weight:500; color:rgba(255,255,255,0.45); margin-bottom:1.25rem; letter-spacing:0.06em; text-transform:uppercase; }
+.price-from { margin-bottom:1.25rem; }
+.price-from-label { font-size:12px; color:rgba(255,255,255,0.5); font-family:var(--font-body); margin-bottom:4px; }
+.price-from-amount { font-family:var(--font-display); font-size:2rem; font-weight:800; color:white; line-height:1; }
+.price-from-amount span { font-size:13px; font-weight:400; color:rgba(255,255,255,0.5); }
+.price-note { font-size:12px; color:rgba(255,255,255,0.55); line-height:1.6; margin-bottom:1.25rem; font-family:var(--font-body); }
+.price-cta { display:block; text-align:center; padding:12px; border-radius:var(--radius-md); font-family:var(--font-body); font-size:14px; font-weight:700; text-decoration:none; transition:all 0.2s; background:rgba(255,255,255,0.12); color:white; border:1px solid rgba(255,255,255,0.2); }
+.price-card.featured .price-cta { background:white; color:var(--blue); border-color:white; }
+.price-cta:hover { background:rgba(255,255,255,0.22); }
+.price-card.featured .price-cta:hover { background:var(--blue-light); }
+.pricing-note { text-align:center; margin-top:2rem; font-size:13px; color:rgba(255,255,255,0.4); font-family:var(--font-body); }
+.pricing-note strong { color:rgba(255,255,255,0.75); }
+
+/* GALLERY */
+#gallery { background:var(--off-white); }
+.gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:2.5rem; }
+.gallery-item { border-radius:var(--radius-md); overflow:hidden; position:relative; cursor:pointer; transition:transform 0.3s,box-shadow 0.3s; }
+.gallery-item:hover { transform:scale(1.02); box-shadow:var(--shadow-lg); z-index:1; }
+.gallery-item img { width:100%; height:100%; object-fit:cover; display:block; }
+.gallery-item:nth-child(1) { grid-column:span 2; }
+.gallery-item:nth-child(1) img { aspect-ratio:16/9; }
+.gallery-item:nth-child(2) img { aspect-ratio:3/4; }
+.gallery-item:nth-child(3) img { aspect-ratio:1/1; }
+.gallery-item:nth-child(4) img { aspect-ratio:1/1; }
+.gallery-item:nth-child(5) img { aspect-ratio:3/4; }
+.gallery-item:nth-child(6) img { aspect-ratio:1/1; }
+.gallery-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,30,70,0.75) 0%,transparent 55%); display:flex; align-items:flex-end; padding:16px; opacity:0; transition:opacity 0.3s; }
+.gallery-item:hover .gallery-overlay { opacity:1; }
+.gallery-caption { font-family:var(--font-body); font-size:13px; font-weight:600; color:white; }
+
+/* CONTACT */
+#contact { background:var(--white); }
+.contact-grid { display:grid; grid-template-columns:1.1fr 0.9fr; gap:3rem; margin-top:2.5rem; }
+.contact-card { background:var(--gray-900); border-radius:var(--radius-xl); padding:2.5rem; position:relative; overflow:hidden; }
+.contact-card-bg { position:absolute; inset:0; background-image:linear-gradient(rgba(0,153,230,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,153,230,0.05) 1px,transparent 1px); background-size:40px 40px; }
+.contact-card-orb { position:absolute; width:280px; height:280px; background:var(--blue); border-radius:50%; filter:blur(80px); opacity:0.15; top:-100px; right:-80px; pointer-events:none; }
+.contact-info { position:relative; z-index:1; }
+.contact-info h3 { font-family:var(--font-body); font-size:1.6rem; font-weight:900; color:white; margin-bottom:6px; }
+.contact-info h3 .en { font-family:var(--font-display); font-size:0.75rem; font-weight:400; color:rgba(255,255,255,0.4); display:block; margin-top:2px; letter-spacing:0.06em; }
+.contact-info p { font-size:14px; color:rgba(255,255,255,0.55); margin-bottom:2rem; line-height:1.7; }
+.contact-items { display:flex; flex-direction:column; gap:16px; }
+.contact-item { display:flex; align-items:flex-start; gap:14px; }
+.contact-icon { width:44px; height:44px; background:rgba(0,153,230,0.18); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.contact-item-text strong { display:block; font-family:var(--font-body); font-size:12px; font-weight:700; color:rgba(255,255,255,0.55); margin-bottom:3px; letter-spacing:0.04em; }
+.contact-item-text span { font-size:14px; color:white; line-height:1.6; font-family:var(--font-body); }
+.contact-wa-btn { display:flex; align-items:center; justify-content:center; gap:10px; background:#25D366; color:white; text-decoration:none; padding:15px 28px; border-radius:14px; font-family:var(--font-body); font-size:15px; font-weight:700; margin-top:2rem; transition:all 0.2s; box-shadow:0 4px 18px rgba(37,211,102,0.35); }
+.contact-wa-btn:hover { background:#1EBC5A; transform:translateY(-2px); box-shadow:0 8px 24px rgba(37,211,102,0.45); }
+.contact-side { }
+.contact-map { border-radius:var(--radius-lg); overflow:hidden; background:var(--gray-100); height:260px; display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; }
+.map-placeholder { text-align:center; }
+.map-placeholder span { font-size:3rem; display:block; margin-bottom:10px; }
+.map-placeholder p { font-size:13px; color:var(--gray-500); line-height:1.6; font-family:var(--font-body); }
+.contact-hours { background:var(--gray-50); border-radius:var(--radius-md); padding:1.25rem; border:1px solid var(--gray-100); }
+.contact-hours h4 { font-family:var(--font-body); font-size:14px; font-weight:700; color:var(--gray-900); margin-bottom:10px; }
+.hours-row { display:flex; justify-content:space-between; font-size:13px; padding:6px 0; border-bottom:1px solid var(--gray-100); font-family:var(--font-body); }
+.hours-row:last-child { border-bottom:none; }
+.hours-row span:first-child { color:var(--gray-500); }
+.hours-row span:last-child { font-weight:600; color:var(--gray-900); }
+.hours-row .closed { color:var(--gray-200); font-weight:400; font-size:11px; }
+
+/* FOOTER */
+footer { background:var(--gray-900); padding:2.5rem 2rem; text-align:center; border-top:1px solid rgba(255,255,255,0.06); }
+.footer-inner { max-width:1100px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:1rem; }
+.footer-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.footer-logo img { width:30px; height:30px; border-radius:7px; object-fit:contain; }
+.footer-logo-text { font-family:var(--font-body); font-size:15px; font-weight:700; color:rgba(255,255,255,0.7); }
+.footer-links { display:flex; gap:1.5rem; }
+.footer-links a { font-size:13px; font-family:var(--font-body); color:rgba(255,255,255,0.4); text-decoration:none; transition:color 0.2s; }
+.footer-links a:hover { color:var(--blue); }
+.footer-copy { font-size:12px; color:rgba(255,255,255,0.25); font-family:var(--font-body); }
+
+
+.trial-cta-btn { display:inline-flex; align-items:center; gap:8px; background:var(--blue); color:white; padding:13px 26px; border-radius:99px; font-family:var(--font-body); font-weight:700; font-size:14px; text-decoration:none; transition:all 0.2s; box-shadow:0 4px 16px rgba(0,153,230,0.35); margin-top:1.5rem; }
+.trial-cta-btn:hover { background:var(--blue-dark); transform:translateY(-2px); }
+/* FLOAT WA */
+.float-wa { position:fixed; bottom:28px; right:28px; z-index:999; display:flex; align-items:center; gap:10px; background:#25D366; color:white; text-decoration:none; padding:13px 22px; border-radius:99px; font-family:var(--font-body); font-size:14px; font-weight:700; box-shadow:0 4px 20px rgba(37,211,102,0.4); transition:all 0.25s; animation:bounceIn 0.8s 1s both; }
+.float-wa:hover { transform:translateY(-3px) scale(1.04); box-shadow:0 8px 28px rgba(37,211,102,0.55); }
+@keyframes bounceIn { from { opacity:0; transform:scale(0.6) translateY(20px); } 80% { transform:scale(1.05) translateY(-4px); } to { opacity:1; transform:scale(1) translateY(0); } }
+
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.65s ease,transform 0.65s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-delay-1 { transition-delay:0.1s; }
+.reveal-delay-2 { transition-delay:0.2s; }
+.reveal-delay-3 { transition-delay:0.3s; }
+
+/* MOBILE NAV */
+.nav-mobile { display:none; position:fixed; top:66px; left:0; right:0; background:white; border-bottom:1px solid var(--gray-100); padding:1rem 2rem 1.5rem; box-shadow:var(--shadow-md); z-index:999; flex-direction:column; gap:0.75rem; }
+.nav-mobile.open { display:flex; }
+.nav-mobile a { text-decoration:none; font-family:var(--font-body); font-size:15px; font-weight:600; color:var(--gray-700); padding:9px 0; border-bottom:1px solid var(--gray-100); transition:color 0.2s; }
+.nav-mobile a:last-child { border-bottom:none; }
+.nav-mobile a:hover { color:var(--blue); }
+
+/* RESPONSIVE */
+@media(max-width:900px) {
+  .nav-links { display:none; }
+  .nav-hamburger { display:flex; }
+  .about-grid { grid-template-columns:1fr; }
+  .about-photo-wrap { display:none; }
+  .course-grid { grid-template-columns:1fr; }
+  .pricing-grid { grid-template-columns:1fr; }
+  .gallery-grid { grid-template-columns:repeat(2,1fr); }
+  .gallery-item:nth-child(1) { grid-column:span 2; }
+  .about-features { grid-template-columns:1fr; }
+  .contact-grid { grid-template-columns:1fr; }
+}
+@media(max-width:600px) {
+  .section-inner { padding:3.5rem 1.25rem; }
+  .hero-stats { gap:1.25rem; }
+  .gallery-grid { grid-template-columns:1fr; }
+  .gallery-item:nth-child(1) { grid-column:span 1; }
+  .float-wa span { display:none; }
+  .float-wa { padding:15px; border-radius:50%; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <img class="nav-logo-img" src="image/logo.jpg" alt="宇宙教育中心">
+      <div class="nav-logo-text">
+        <span class="zh">宇宙教育中心</span>
+        <span class="en">Cosmos Education Centre</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">關於我們</a></li>
+      <li><a href="#courses">課程</a></li>
+      <li><a href="#pricing">收費</a></li>
+      <li><a href="#gallery">相簿</a></li>
+      <li><a href="#contact">聯絡</a></li>
+      <li><a href="https://wa.me/85260229965" class="nav-cta">WhatsApp 報名</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">關於我們</a>
+  <a href="#courses" onclick="closeMobile()">課程</a>
+  <a href="#pricing" onclick="closeMobile()">收費</a>
+  <a href="#gallery" onclick="closeMobile()">相簿</a>
+  <a href="#contact" onclick="closeMobile()">聯絡我們</a>
+  <a href="https://wa.me/85260229965" style="color:#25D366 !important;">💬 WhatsApp 6022 9965</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-photo">
+    <img src="image/classroom-english-group.jpg" alt="課室實況">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      荃灣南豐中心 · 🎁 免費試堂 · WhatsApp 即報
+    </div>
+    <h1 class="hero-title">宇宙教育中心</h1>
+    <div class="hero-subtitle-en">Cosmos Education Centre</div>
+    <p class="hero-desc">
+      小一至中六全面學科輔導，外籍英語導師親授。<br>
+      <span style="font-size:0.9em;opacity:0.8;">Expert tutoring from P1 to S6 · Native British English teacher</span>
+    </p>
+    <div class="hero-actions">
+      <a href="https://wa.me/85260229965" class="btn-primary">🎁 免費試堂 · WhatsApp 即報</a>
+      <a href="#courses" class="btn-secondary">了解課程 →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">年教學經驗</div>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat-item">
+        <div class="stat-num">K2–S6</div>
+        <div class="stat-label">全年級覆蓋</div>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat-item">
+        <div class="stat-num">免費</div>
+        <div class="stat-label">首堂試堂</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FREE TRIAL BAR -->
+<div id="trialBar" style="background:var(--blue);padding:14px 2rem;text-align:center;position:sticky;top:66px;z-index:900;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
+  <span style="font-family:var(--font-body);font-weight:700;font-size:15px;color:white;">🎁 免費試堂！Free Trial Class · 名額有限，立即登記</span>
+  <a href="https://wa.me/85260229965" style="background:white;color:var(--blue);font-family:var(--font-body);font-weight:700;font-size:13px;padding:8px 20px;border-radius:99px;text-decoration:none;white-space:nowrap;">💬 WhatsApp 即報</a>
+  <button onclick="document.getElementById('trialBar').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,0.7);font-size:20px;cursor:pointer;padding:0 4px;line-height:1;">×</button>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-photo-wrap reveal">
+        <div class="about-photo-bg"></div>
+        <div class="about-photo">
+          <img src="image/teacher-andrew-students.jpg" alt="導師與學生">
+        </div>
+        <div class="about-teacher-badge">
+          <div class="teacher-avatar">A</div>
+          <div class="teacher-badge-text">
+            <strong>Andrew</strong>
+            <span>英國土生土長導師</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="section-label reveal">關於我們</div>
+        <h2 class="section-title reveal">專業輔導<br>建立自信
+          <span class="en">Expert Tutoring · Real Confidence</span>
+        </h2>
+        <p class="section-subtitle reveal">
+          宇宙教育中心以外籍英語小組班為旗艦課程，由英國本土導師 Andrew 親授，二十年以上豐富教學經驗，純正英式發音。同時提供小學功課輔導及中學全科補習，全方位支援學生成長。
+        </p>
+        <div class="about-tags reveal">
+          <span class="about-tag">🇬🇧 英國外籍導師</span>
+          <span class="about-tag">📐 小一至中六</span>
+          <span class="about-tag">🗣 口語訓練</span>
+          <span class="about-tag">📝 寫作技巧</span>
+          <span class="about-tag">🏫 小班教學</span>
+        </div>
+        <div class="about-features">
+          <div class="about-feature reveal reveal-delay-1">
+            <div class="about-feature-icon">🇬🇧</div>
+            <h4>頂尖英國師資</h4>
+            <p>Andrew老師，20+年經驗，土生土長英國人，純正英式發音</p>
+          </div>
+          <div class="about-feature reveal reveal-delay-2">
+            <div class="about-feature-icon">🌱</div>
+            <h4>兒童專屬成長</h4>
+            <p>從啟蒙起步，輕鬆克服英文表達恐懼，培養流利語感與爆棚自信</p>
+          </div>
+          <div class="about-feature reveal reveal-delay-3">
+            <div class="about-feature-icon">💡</div>
+            <h4>痛點解決</h4>
+            <p>告別「孩子不敢說英文」的煩惱，見證小孩自然蛻變，開心學習</p>
+          </div>
+          <div class="about-feature reveal reveal-delay-1">
+            <div class="about-feature-icon">🚀</div>
+            <h4>成人高效提升</h4>
+            <p>沉浸式環境，突破語言障礙，快速掌握實用英語</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="section-inner">
+    <div class="section-label reveal">課程</div>
+    <h2 class="section-title reveal">全面照顧每位學生
+      <span class="en">Courses for Every Level</span>
+    </h2>
+    <p class="section-subtitle reveal">外籍英語小組班為主打課程，另設小學功課輔導及中學全科補習。首堂免費試堂，立即 WhatsApp 報名！</p>
+
+    <div class="courses-tabs reveal">
+      <button class="tab-btn active" onclick="switchTab(0)">🌍 兒童英語小組班</button>
+      <button class="tab-btn" onclick="switchTab(1)">🗣 青年英語小組班</button>
+      <button class="tab-btn" onclick="switchTab(2)">📚 小學功課輔導班</button>
+      <button class="tab-btn" onclick="switchTab(3)">🎓 中學全科補習</button>
+    </div>
+
+    <!-- Tab 0 -->
+    <div class="course-panel active" id="panel-0">
+      <div class="course-grid">
+        <div class="course-info reveal">
+          <span class="course-tag">K2 – 小六</span>
+          <h3 class="course-title">兒童英語小組班</h3>
+          <div class="course-title-en">Children's English Group Class · Native Teacher</div>
+          <p class="course-desc">由資深英國外籍導師 Andrew 主理，小組形式授課，專注培養作文技巧、句子運用、詞彙應用及口語訓練，以生動有趣的方式讓小朋友愛上英語。</p>
+          <div class="course-highlights">
+            <div class="course-highlight"><div class="ch-dot"></div>作文技巧及句子運用——從低年級起步</div>
+            <div class="course-highlight"><div class="ch-dot"></div>詞彙擴展及口語訓練，純正英式發音</div>
+            <div class="course-highlight"><div class="ch-dot"></div>小組課堂，互動學習氣氛濃厚</div>
+            <div class="course-highlight"><div class="ch-dot"></div>🎁 設有<strong>免費試堂</strong>，歡迎報名體驗</div>
+          </div>
+          <a href="https://wa.me/85260229965" class="trial-cta-btn">🎁 免費試堂 · WhatsApp 即報名</a>
+        </div>
+        <div class="course-schedule-card reveal">
+          <div class="course-img">
+            <img src="image/children-english-class.jpg" alt="兒童英語班">
+          </div>
+          <div class="schedule-title">📅 兒童英語小組班時間表</div>
+          <div class="schedule-items">
+            <div class="schedule-item">
+              <div><div class="schedule-day">星期三</div><div class="schedule-time">5:30pm – 6:30pm</div></div>
+              <div class="schedule-from">小組班</div>
+            </div>
+            <div class="schedule-item">
+              <div><div class="schedule-day">星期六</div><div class="schedule-time">12:15pm – 1:15pm</div></div>
+              <div class="schedule-from">小組班</div>
+            </div>
+          </div>
+          <div class="schedule-note">🎁 首堂免費試堂！立即 WhatsApp 6022 9965 報名</div>
+        </div>
+      </div>
+    </div>
+    <!-- Tab 1 -->
+    <div class="course-panel" id="panel-1">
+      <div class="course-grid">
+        <div class="course-info reveal">
+          <span class="course-tag">中學</span>
+          <h3 class="course-title">青年英語小組班</h3>
+          <div class="course-title-en">Youth English Group Class · Native Teacher</div>
+          <p class="course-desc">專為中學生而設，由外籍導師以時事及報章為教授題材，深度訓練英語閱讀、批判性討論及分析能力，全面提升英語水平及應試技巧。</p>
+          <div class="course-highlights">
+            <div class="course-highlight"><div class="ch-dot"></div>以時事及報章為教材，貼近DSE要求</div>
+            <div class="course-highlight"><div class="ch-dot"></div>英語閱讀理解及文章分析能力訓練</div>
+            <div class="course-highlight"><div class="ch-dot"></div>小組互動討論，批判性思維培養</div>
+            <div class="course-highlight"><div class="ch-dot"></div>🎁 設有<strong>免費試堂</strong>，歡迎報名體驗</div>
+          </div>
+          <a href="https://wa.me/85260229965" class="trial-cta-btn">🎁 免費試堂 · WhatsApp 即報名</a>
+        </div>
+        <div class="course-schedule-card reveal">
+          <div class="course-img">
+            <img src="image/classroom-english-group.jpg" alt="青年英語班">
+          </div>
+          <div class="schedule-title">📅 青年英語小組班時間表</div>
+          <div class="schedule-items">
+            <div class="schedule-item">
+              <div><div class="schedule-day">星期六（初中）</div><div class="schedule-time">11:15am – 12:15pm</div></div>
+              <div class="schedule-from">小組班</div>
+            </div>
+            <div class="schedule-item">
+              <div><div class="schedule-day">星期六（高中）</div><div class="schedule-time">2:15pm – 3:15pm</div></div>
+              <div class="schedule-from">小組班</div>
+            </div>
+          </div>
+          <div class="schedule-note">🎁 首堂免費試堂！立即 WhatsApp 6022 9965 報名</div>
+        </div>
+      </div>
+    </div>
+    <!-- Tab 2 -->
+    <div class="course-panel" id="panel-2">
+      <div class="course-grid">
+        <div class="course-info reveal">
+          <span class="course-tag">小一 – 小六</span>
+          <h3 class="course-title">小學功課輔導班</h3>
+          <div class="course-title-en">Primary Homework Tutorial</div>
+          <p class="course-desc">為小一至小六學生提供有系統的功課輔導及學科支援，在專注學習的環境下完成功課。星期一至五下午3:30–7:00，時間靈活可選。</p>
+          <div class="course-highlights">
+            <div class="course-highlight"><div class="ch-dot"></div>有系統地完成功課，建立良好學習習慣</div>
+            <div class="course-highlight"><div class="ch-dot"></div>靈活選擇1.5小時、2小時或3小時堂</div>
+            <div class="course-highlight"><div class="ch-dot"></div>星期一至五，下午3:30–7:00（公眾假期休息）</div>
+            <div class="course-highlight"><div class="ch-dot"></div>設有每週三天優惠方案</div>
+          </div>
+        </div>
+        <div class="course-schedule-card reveal">
+          <div class="course-img">
+            <img src="image/primary-homework-tutorial.jpg" alt="小學輔導班">
+          </div>
+          <div class="schedule-title">📅 星期一至五 · 3:30–7:00pm</div>
+          <div class="schedule-items">
+            <div class="schedule-item">
+              <div><div class="schedule-day">小一–小二</div><div class="schedule-time">可選 1.5–3 小時</div></div>
+              <div class="schedule-from">查詢價格</div>
+            </div>
+            <div class="schedule-item">
+              <div><div class="schedule-day">小三–小四</div><div class="schedule-time">可選 1.5–3 小時</div></div>
+              <div class="schedule-from">查詢價格</div>
+            </div>
+            <div class="schedule-item">
+              <div><div class="schedule-day">小五–小六</div><div class="schedule-time">可選 1.5–3 小時</div></div>
+              <div class="schedule-from">查詢價格</div>
+            </div>
+          </div>
+          <div class="schedule-note">💡 每星期自選三天方案另有優惠，歡迎WhatsApp查詢</div>
+        </div>
+      </div>
+    </div>
+    <!-- Tab 3 -->
+    <div class="course-panel" id="panel-3">
+      <div class="course-grid">
+        <div class="course-info reveal">
+          <span class="course-tag">中一 – 中三</span>
+          <h3 class="course-title">中學全科補習</h3>
+          <div class="course-title-en">Secondary All-Subject Tutoring (S1–S3)</div>
+          <p class="course-desc">全面支援中一至中三各科學習，每週更設一堂外籍導師英語課，是我們的獨家特色，讓學生在補習的同時提升英語水平。</p>
+          <div class="course-highlights">
+            <div class="course-highlight"><div class="ch-dot"></div>中一至中三全科覆蓋，打好初中基礎</div>
+            <div class="course-highlight"><div class="ch-dot"></div>每週包含一堂外籍英語課（獨家安排）</div>
+            <div class="course-highlight"><div class="ch-dot"></div>可選每週三堂或五堂，每堂2小時</div>
+            <div class="course-highlight"><div class="ch-dot"></div>不需外籍導師可享學費優惠</div>
+          </div>
+        </div>
+        <div class="course-schedule-card reveal">
+          <div class="course-img">
+            <img src="image/classroom-english-group.jpg" alt="中學補習班">
+          </div>
+          <div class="schedule-title">📅 星期一至五 · 3:30–7:00pm · 每節2小時</div>
+          <div class="schedule-items">
+            <div class="schedule-item">
+              <div><div class="schedule-day">中一</div><div class="schedule-time">每週三堂 / 五堂，每節2小時</div></div>
+              <div class="schedule-from">月費由 $2,200 <span>起</span></div>
+            </div>
+            <div class="schedule-item">
+              <div><div class="schedule-day">中二</div><div class="schedule-time">每週三堂 / 五堂，每節2小時</div></div>
+              <div class="schedule-from">月費由 $2,400 <span>起</span></div>
+            </div>
+            <div class="schedule-item">
+              <div><div class="schedule-day">中三</div><div class="schedule-time">每週三堂 / 五堂，每節2小時</div></div>
+              <div class="schedule-from">月費由 $2,600 <span>起</span></div>
+            </div>
+          </div>
+          <div class="schedule-note">💡 不需要外籍導師可扣減學費，詳情請WhatsApp查詢</div>
+        </div>
+      </div>
+    </div>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-label reveal">收費</div>
+    <h2 class="section-title reveal">清晰透明 · 靈活選擇
+      <span class="en">Transparent & Flexible Pricing</span>
+    </h2>
+    <p class="section-subtitle reveal">以下為小學功課輔導班及中學全科補習月費參考。</p>
+
+    <div class="section-label reveal" style="margin-top:0.5rem;">📚 小學功課輔導班</div>
+    <div class="pricing-toggle reveal">
+      <span class="toggle-label active" id="toggle-5">每週五天</span>
+      <button class="toggle-switch" id="pricingToggle" onclick="togglePricing()">
+        <div class="toggle-knob"></div>
+      </button>
+      <span class="toggle-label" id="toggle-3">每週三天</span>
+    </div>
+
+    <div class="pricing-grid" id="pricing-5day">
+      <div class="price-card reveal reveal-delay-1">
+        <div class="price-level">小一–小二</div>
+        <div class="price-level-en">Lower Primary</div>
+        <div class="price-from">
+          <div class="price-from-label">月費由</div>
+          <div class="price-from-amount">$1,900 <span>起</span></div>
+        </div>
+        <div class="price-note">可選 1.5小時、2小時或3小時堂，靈活配合學生需要</div>
+        <a href="https://wa.me/85260229965" class="price-cta">WhatsApp 查詢</a>
+      </div>
+      <div class="price-card featured reveal reveal-delay-2">
+        <div class="price-level">小三–小四</div>
+        <div class="price-level-en">Mid Primary</div>
+        <div class="price-from">
+          <div class="price-from-label">月費由</div>
+          <div class="price-from-amount">$2,000 <span>起</span></div>
+        </div>
+        <div class="price-note">可選 1.5小時、2小時或3小時堂，靈活配合學生需要</div>
+        <a href="https://wa.me/85260229965" class="price-cta">WhatsApp 查詢</a>
+      </div>
+      <div class="price-card reveal reveal-delay-3">
+        <div class="price-level">小五–小六</div>
+        <div class="price-level-en">Upper Primary</div>
+        <div class="price-from">
+          <div class="price-from-label">月費由</div>
+          <div class="price-from-amount">$2,100 <span>起</span></div>
+        </div>
+        <div class="price-note">可選 1.5小時、2小時或3小時堂，靈活配合學生需要</div>
+        <a href="https://wa.me/85260229965" class="price-cta">WhatsApp 查詢</a>
+      </div>
+    </div>
+
+    <div class="pricing-grid" id="pricing-3day" style="display:none">
+      <div class="price-card reveal">
+        <div class="price-level">小一–小二</div>
+        <div class="price-level-en">Lower Primary</div>
+        <div class="price-from">
+          <div class="price-from-label">月費由</div>
+          <div class="price-from-amount">$1,700 <span>起</span></div>
+        </div>
+        <div class="price-note">可選 1.5小時或2小時堂，每週自選三天上課</div>
+        <a href="https://wa.me/85260229965" class="price-cta">WhatsApp 查詢</a>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="price-level">小三–小四</div>
+        <div class="price-level-en">Mid Primary</div>
+        <div class="price-from">
+          <div class="price-from-label">月費由</div>
+          <div class="price-from-amount">$1,800 <span>起</span></div>
+        </div>
+        <div class="price-note">可選 1.5小時或2小時堂，每週自選三天上課</div>
+        <a href="https://wa.me/85260229965" class="price-cta">WhatsApp 查詢</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-level">小五–小六</div>
+        <div class="price-level-en">Upper Primary</div>
+        <div class="price-from">
+          <div class="price-from-label">月費由</div>
+          <div class="price-from-amount">$1,900 <span>起</span></div>
+        </div>
+        <div class="price-note">可選 1.5小時或2小時堂，每週自選三天上課</div>
+        <a href="https://wa.me/85260229965" class="price-cta">WhatsApp 查詢</a>
+      </div>
+    </div>
+
+    <div class="section-label reveal" style="margin-top:2.5rem;">🎓 中學全科補習（中一–中三）</div>
+    <p class="section-subtitle reveal" style="margin-bottom:1.5rem;">每週三堂或五堂，每節2小時。每週包含一堂外籍英語課（獨家安排）。</p>
+    <div class="pricing-grid reveal">
+      <div class="price-card reveal reveal-delay-1">
+        <div class="price-level">中一</div>
+        <div class="price-level-en">Secondary 1</div>
+        <div class="price-from">
+          <div class="price-from-label">月費由</div>
+          <div class="price-from-amount">$2,200 <span>起</span></div>
+        </div>
+        <div class="price-note">每週三堂或五堂，每節2小時。不需外籍導師可扣減學費。</div>
+        <a href="https://wa.me/85260229965" class="price-cta">WhatsApp 查詢</a>
+      </div>
+      <div class="price-card featured reveal reveal-delay-2">
+        <div class="price-level">中二</div>
+        <div class="price-level-en">Secondary 2</div>
+        <div class="price-from">
+          <div class="price-from-label">月費由</div>
+          <div class="price-from-amount">$2,400 <span>起</span></div>
+        </div>
+        <div class="price-note">每週三堂或五堂，每節2小時。不需外籍導師可扣減學費。</div>
+        <a href="https://wa.me/85260229965" class="price-cta">WhatsApp 查詢</a>
+      </div>
+      <div class="price-card reveal reveal-delay-3">
+        <div class="price-level">中三</div>
+        <div class="price-level-en">Secondary 3</div>
+        <div class="price-from">
+          <div class="price-from-label">月費由</div>
+          <div class="price-from-amount">$2,600 <span>起</span></div>
+        </div>
+        <div class="price-note">每週三堂或五堂，每節2小時。不需外籍導師可扣減學費。</div>
+        <a href="https://wa.me/85260229965" class="price-cta">WhatsApp 查詢</a>
+      </div>
+    </div>
+
+    <div class="pricing-note reveal" style="margin-top:2rem;">
+      英語小組班：<strong>4堂一組</strong> &nbsp;·&nbsp;
+      外籍私人英語課：<strong>每小時$390起</strong> &nbsp;·&nbsp;
+      詳情歡迎 <strong>WhatsApp 查詢</strong>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <div class="section-label reveal">相簿</div>
+    <h2 class="section-title reveal">課室實況
+      <span class="en">Learning in Action</span>
+    </h2>
+    <p class="section-subtitle reveal">真實課堂留影——小班教學，投入學習，導師用心。</p>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal">
+        <img src="image/classroom-english-group.jpg" alt="英語小組課堂">
+        <div class="gallery-overlay"><span class="gallery-caption">英語小組課堂</span></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-1">
+        <img src="image/children-english-class.jpg" alt="英語詞彙遊戲">
+        <div class="gallery-overlay"><span class="gallery-caption">英語詞彙遊戲</span></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-2">
+        <img src="image/primary-homework-tutorial.jpg" alt="師生閱讀時間">
+        <div class="gallery-overlay"><span class="gallery-caption">師生閱讀時間</span></div>
+      </div>
+      <div class="gallery-item reveal reveal-delay-3">
+        <img src="image/teacher-andrew-students.jpg" alt="一對一英語課">
+        <div class="gallery-overlay"><span class="gallery-caption">一對一英語課</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label reveal">聯絡我們</div>
+    <h2 class="section-title reveal">立即報名
+      <span class="en">Enrol Today</span>
+    </h2>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="contact-card-bg"></div>
+        <div class="contact-card-orb"></div>
+        <div class="contact-info">
+          <h3>聯絡我們
+            <span class="en">GET IN TOUCH</span>
+          </h3>
+          <p>WhatsApp 我們查詢課程、安排試堂或了解收費詳情，我們很樂意為您解答！</p>
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div class="contact-item-text">
+                <strong>地址 ADDRESS</strong>
+                <span>荃灣南豐中心<br>Nan Fung Centre, Tsuen Wan</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📱</div>
+              <div class="contact-item-text">
+                <strong>WhatsApp 查詢報名</strong>
+                <span>6022 9965</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">⏰</div>
+              <div class="contact-item-text">
+                <strong>上課時間 HOURS</strong>
+                <span>星期一至五 3:30–7:00pm<br>星期六 10:00am–5:30pm</span>
+              </div>
+            </div>
+          </div>
+          <a href="https://wa.me/85260229965" class="contact-wa-btn">
+            💬 &nbsp;WhatsApp 即時查詢 · 6022 9965
+          </a>
+        </div>
+      </div>
+      <div class="contact-side reveal reveal-delay-1">
+        <div class="contact-map">
+          <div class="map-placeholder">
+            <span>🗺</span>
+            <p>
+              <strong>荃灣南豐中心</strong><br>
+              Nan Fung Centre, Tsuen Wan<br>
+              <small>荃灣站 MTR Exit B</small>
+            </p>
+          </div>
+        </div>
+        <div class="contact-hours">
+          <h4>📅 上課時間表</h4>
+          <div class="hours-row">
+            <span>星期一至五</span>
+            <span>3:30pm – 7:00pm</span>
+          </div>
+          <div class="hours-row">
+            <span>星期六</span>
+            <span>10:00am – 5:30pm</span>
+          </div>
+          <div class="hours-row">
+            <span>星期日</span>
+            <span class="closed">休息</span>
+          </div>
+          <div class="hours-row">
+            <span>公眾假期</span>
+            <span class="closed">休息</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="#hero" class="footer-logo">
+      <img src="image/logo.jpg" alt="宇宙教育中心">
+      <span class="footer-logo-text">宇宙教育中心</span>
+    </a>
+    <div class="footer-links">
+      <a href="#about">關於我們</a>
+      <a href="#courses">課程</a>
+      <a href="#pricing">收費</a>
+      <a href="#gallery">相簿</a>
+      <a href="#contact">聯絡</a>
+    </div>
+    <p class="footer-copy">© 2025 宇宙教育中心 Cosmos Education Centre · 荃灣南豐中心</p>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/85260229965" class="float-wa" target="_blank" rel="noopener">
+  💬 <span>WhatsApp 報名</span>
+</a>
+
+<script>
+function switchTab(i) {
+  document.querySelectorAll('.tab-btn').forEach((b,j) => b.classList.toggle('active', j===i));
+  document.querySelectorAll('.course-panel').forEach((p,j) => p.classList.toggle('active', j===i));
+}
+let is3 = false;
+function togglePricing() {
+  is3 = !is3;
+  document.getElementById('pricingToggle').classList.toggle('toggled', is3);
+  document.getElementById('pricing-5day').style.display = is3 ? 'none' : 'grid';
+  document.getElementById('pricing-3day').style.display = is3 ? 'grid' : 'none';
+  document.getElementById('toggle-5').classList.toggle('active', !is3);
+  document.getElementById('toggle-3').classList.toggle('active', is3);
+}
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold:0.1, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+});
+</script>
+</body>
+</html>
